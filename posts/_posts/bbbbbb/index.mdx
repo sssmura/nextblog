@@ -1,0 +1,43 @@
+---
+title: "bbbbb"
+coverImageUrl: "@@imageUrl@@/cover.jpg"
+date: 2023-05-20
+---
+
+# Next.jsでのLazy Loadingの実装方法
+
+## 概要
+
+Lazy loadingは、必要な時にだけリソースを読み込む技術です。Next.jsでは、クライアントコンポーネントやインポートされたライブラリの読み込みを遅らせることで、初期読み込みのパフォーマンスを向上させることができます。
+
+## 方法
+
+Next.jsでのLazy Loadingの実装方法は主に2つあります。
+
+1. [`next/dynamic`](#nextdynamic-を使用した動的インポート)
+2. [`React.lazy()`と`Suspense`](#reactlazyとsuspenseを使用)
+
+### `next/dynamic`を使用した動的インポート
+
+`next/dynamic`は、Next.jsで動的インポートを行うためのヘルパーです。以下に例を示します。
+
+```tsx
+import dynamic from "next/dynamic";
+console.log("hewwo"); // [!code --]
+console.log("hello"); // [!code ++]
+const DynamicComponent = dynamic(() => import("../components/MyComponent"), {
+  loading: () => <p>Loading...</p>,
+});
+
+function Home() {
+  return (
+    <div>
+      <h1>Welcome to my website</h1>
+      <DynamicComponent />
+    </div>
+  );
+}
+export default Home;
+```
+
+![](@imageUrl/images/test.jpg)
